@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <form>
+            <div >
+                    <input id="origin-input" class="controls" type="text"  name="soruce" placeholder="Source location" [(ngModel)]="mapObject.sourceAddress">
+            
+                    <input id="destination-input" class="controls" type="text" placeholder="Destination location" name="destination" [(ngModel)]="mapObject.destinationAddress">
+                        <!-- <button class="btn btn-primary ml-4 " (click)="go()">Go</button>
+                        <span class="ml-5">{{deepLinkUrl}}</span> -->
+            </div>
+        
+    </form>
+    <div class="row ml-1 mt-2">
+        <div class="col-md-12">
+            <agm-map (mapReady)="mapReady($event)" [latitude]="mapObject.current.lat" [longitude]="mapObject.current.lng" [zoom]="mapObject.current.zoom" [disableDefaultUI]="false" [zoomControl]="false"
+                (mapClick)="mapClicked($event)">
+                <agm-direction *ngIf="mapData.length==2" [origin]="mapObject.origin" [destination]="mapObject.destinationLoc"></agm-direction>
+                <agm-marker *ngFor="let m of mapData; let i = index"  [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="m.iconUrl">
+
+                    <agm-info-window>
+                        <strong>{{m.formatted_address}}</strong>
+                    </agm-info-window>
+
+                </agm-marker>
+
+                <!-- <agm-circle [latitude]="lat + 0.3" [longitude]="lng" [radius]="5000" [fillColor]="'red'"
+                    [circleDraggable]="true" [editable]="true">
+                </agm-circle> -->
+
+            </agm-map>
+        </div>
+
+    </div>
+</div>
